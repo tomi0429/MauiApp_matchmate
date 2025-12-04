@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.UserDetailsPage"
+             Title="Részletek"
+             BackgroundColor="{StaticResource AppBackground}">
+    <ContentPage.BindingContext>
+        <vm:UserDetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid ColumnDefinitions="4*, 6*" Padding="15" ColumnSpacing="20">
+
+        <Border Grid.Column="0" 
+                BackgroundColor="{StaticResource CardBackground}" 
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                Padding="20"
+                VerticalOptions="Fill">
+
+            <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+
+                <Border StrokeShape="RoundRectangle 75" 
+                        HeightRequest="150" WidthRequest="150" 
+                        HorizontalOptions="Center"
+                        Stroke="{StaticResource Primary}"
+                        StrokeThickness="3">
+                    <Image Source="{Binding SelectedUser.PhotoPath}" 
+                           Aspect="AspectFill" />
+                </Border>
+
+                <Label Text="{Binding SelectedUser.Name}" 
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       HorizontalTextAlignment="Center"/>
+
+                <Label Text="{Binding SelectedUser.Bio}" 
+                       TextColor="{StaticResource TextSecondary}"
+                       FontSize="16" 
+                       FontAttributes="Italic" 
+                       HorizontalOptions="Center" 
+                       HorizontalTextAlignment="Center"/>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Primary}" WidthRequest="100" HorizontalOptions="Center" Margin="0,10"/>
+
+               
+            </VerticalStackLayout>
+        </Border>
+
+        <Border Grid.Column="1"
+                BackgroundColor="{StaticResource CardBackground}"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                Padding="20"
+                VerticalOptions="Fill">
+
+            <Grid RowDefinitions="Auto, *">
+                <Label Grid.Row="0" 
+                       Text="Kvíz Válaszok" 
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="22" 
+                       FontAttributes="Bold" 
+                       Margin="0,0,0,15"/>
+
+                <CollectionView Grid.Row="1" ItemsSource="{Binding UserAnswers}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="#2C2C2C" 
+                                    StrokeShape="RoundRectangle 10" 
+                                    Padding="15" 
+                                    Margin="0,0,0,10"
+                                    StrokeThickness="0">
+
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding Question}" 
+                                           TextColor="{StaticResource TextSecondary}" 
+                                           FontSize="14"/>
+
+                                    <Label Text="{Binding Answer}" 
+                                           TextColor="{StaticResource Primary}" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>
+

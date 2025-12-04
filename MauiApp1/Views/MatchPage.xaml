@@ -1,0 +1,87 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.MatchPage"
+             Title="Eredmények">
+    <ContentPage.BindingContext>
+        <vm:MatchViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="*, Auto" Padding="20">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding Matches}"
+                SelectionMode="Single"
+                SelectionChangedCommand="{Binding SelectUserCommand}"
+                SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+            <CollectionView.EmptyView>
+                <Label Text="Még nincs más játékos, akivel egyeznél." 
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeShape="RoundRectangle 15" 
+                BackgroundColor="{StaticResource CardBackground}"
+                StrokeThickness="0"
+                Margin="0,8"
+                Padding="15">
+
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Margin="15,0,0,0">
+                                <Label Text="{Binding Name}" 
+                           TextColor="{StaticResource TextPrimary}"
+                           FontSize="18" 
+                           FontAttributes="Bold" />
+                                <Label Text="Kattints a részletekért" 
+                           TextColor="{StaticResource TextSecondary}" 
+                           FontSize="12" />
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="1" 
+                        BackgroundColor="{StaticResource Primary}" 
+                        StrokeShape="RoundRectangle 12"
+                        Padding="12,5"
+                        VerticalOptions="Center">
+                                <Label Text="{Binding Score, StringFormat='Eggyezés: {0}'}" 
+                           TextColor="White" 
+                           FontAttributes="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <HorizontalStackLayout Padding="20" Spacing="15" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" > 
+               <Button Text="Válaszok megosztása"  
+                Command="{Binding ShareResultCommand}" 
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="25"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                Margin="0,20,0,0"
+                Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.5}"/>
+
+                <Button Text="Profilom törlése és Kilépés"  
+                 Command="{Binding DeleteMyProfileCommand}" 
+                 BackgroundColor="{StaticResource Primary}"
+                 TextColor="White"
+                 CornerRadius="25"
+                 HeightRequest="50"
+                 FontAttributes="Bold"
+                 Margin="0,20,0,0"
+                 Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.5}"/>
+
+            <!--<Button Text = "Új játék indítása (Adatok törlése)"
+       Command="{Binding ResetGameCommand}" 
+       BackgroundColor="#D32F2F" TextColor="White"
+       Margin="0,20,0,0"/>-->
+
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

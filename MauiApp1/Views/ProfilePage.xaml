@@ -1,0 +1,52 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.ProfilePage"
+             Title="Profil">
+    <ContentPage.BindingContext>
+        <vm:ProfileViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+
+        <Border StrokeShape="RoundRectangle 100" 
+        HeightRequest="200" WidthRequest="200" 
+        BackgroundColor="Black"
+        HorizontalOptions="Center" 
+        Stroke="{StaticResource Primary}" 
+        StrokeThickness="3">
+            <Grid>
+                <Label  FontSize="20"  
+               HorizontalOptions="Center" VerticalOptions="Center" />
+
+                <Image Source="{Binding PhotoPath}" Aspect="AspectFill" />
+            </Grid>
+        </Border>
+
+        <Button Text="Fénykép módosítása" 
+            Command="{Binding TakePhotoCommand}" 
+            BackgroundColor="Transparent" 
+            TextColor="{StaticResource Primary}" 
+            FontSize="14"/>
+
+        <Border StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource CardBackground}" Padding="15,5" StrokeThickness="0">
+            <Entry Placeholder="Add meg a neved" Text="{Binding Name}" TextColor="White" PlaceholderColor="#888"/>
+        </Border>
+
+        <Border StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource CardBackground}" Padding="15,5" StrokeThickness="0">
+            <Editor Placeholder="Írj pár szót magadról..." Text="{Binding Description}" HeightRequest="100" TextColor="White" PlaceholderColor="#888"/>
+        </Border>
+
+        <Button Text="{Binding ButtonText}" 
+            Command="{Binding RegisterCommand}"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="White"
+            CornerRadius="25"
+            HeightRequest="50"
+            FontAttributes="Bold"
+            Margin="0,20,0,0"
+            Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.5}"/>
+       
+    </VerticalStackLayout>
+</ContentPage>

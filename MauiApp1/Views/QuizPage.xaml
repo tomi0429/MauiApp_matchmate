@@ -1,0 +1,68 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.QuizPage">
+
+    <ContentPage.BindingContext>
+        <vm:QuizViewModel />
+    </ContentPage.BindingContext>
+
+   
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+            <Button Text="Profilom szerkesztése"
+            Command="{Binding EditProfileCommand}"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="White"
+            CornerRadius="25"
+            HeightRequest="50"
+            FontAttributes="Bold"
+             Margin="0,20,0,0"
+            Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.5}"
+            HorizontalOptions="Start" />
+            <CollectionView ItemsSource="{Binding Questions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{StaticResource CardBackground}" 
+                          StrokeShape="RoundRectangle 20"
+                          Padding="20" 
+                          Margin="0,10"
+                          StrokeThickness="0"
+                          Shadow="{Shadow Brush=Black, Offset='2,2', Opacity=0.3}">
+
+                            <VerticalStackLayout Spacing="15">
+                                <Label Text="{Binding Text}" 
+                                     TextColor="{StaticResource TextPrimary}" 
+                                     FontAttributes="Bold" 
+                                     FontSize="18" />
+
+                                <BoxView HeightRequest="1" Color="{StaticResource Primary}" WidthRequest="50" HorizontalOptions="Start"/>
+
+                                <VerticalStackLayout Spacing="8">
+                                    <RadioButton Content="{Binding Options[0]}" GroupName="{Binding Text}" CheckedChanged="OnOptionSelected" TextColor="{StaticResource TextSecondary}"/>
+                                    <RadioButton Content="{Binding Options[1]}" GroupName="{Binding Text}" CheckedChanged="OnOptionSelected" TextColor="{StaticResource TextSecondary}"/>
+                                    <RadioButton Content="{Binding Options[2]}" GroupName="{Binding Text}" CheckedChanged="OnOptionSelected" TextColor="{StaticResource TextSecondary}"/>
+                                    <RadioButton Content="{Binding Options[3]}" GroupName="{Binding Text}" CheckedChanged="OnOptionSelected" TextColor="{StaticResource TextSecondary}"/>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </Border>
+                       
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Mentés és eredmények megtekintése"
+                    Command="{Binding SaveAnswersCommand}" 
+                     BackgroundColor="{StaticResource Primary}"
+                     TextColor="White"
+                     CornerRadius="25"
+                     HeightRequest="50"
+                     FontAttributes="Bold"
+                     Margin="0,20,0,0"
+                     Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.5}"/> 
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
